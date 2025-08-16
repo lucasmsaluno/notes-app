@@ -21,6 +21,11 @@
 body {
     display: flex;
     background: #212123;
+    height: 100%;
+}
+
+html {
+    height: 100%;
 }
 
 .notes-sidebar {
@@ -28,6 +33,17 @@ body {
     height: 100vh;
     background: #151515;
     padding: 15px;
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    left: -400px;
+    transition: 0.25s ease-in-out;
+}
+
+.show {
+    left: 0;
 }
 
 .add-note {
@@ -40,10 +56,6 @@ body {
     border-radius: 7px;
     padding: 20px;
     cursor: pointer;
-}
-
-.notes-preview {
-    width: calc(100vw - 350px);
 }
 
 .note {
@@ -92,7 +104,8 @@ body {
 .notes-preview {
     display: flex;
     flex-direction: column;
-    padding: 50px;
+    padding: 50px 50px 50px 100px;
+    width: 100vw;
 }
 
 input, 
@@ -114,10 +127,16 @@ textarea {
     height: 100%;
 }
 
-.notes-sidebar {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+.toggle-sidebar {
+    background: transparent;
+    outline: none;
+    border: none;
+    color: crimson;
+    font-size: 25px;
+    position: absolute;
+    top: 30px;
+    right: -30px;
+    cursor: pointer;
 }
 
 .notes-list {
@@ -125,4 +144,3 @@ textarea {
     overflow-y: auto;
     margin-top: 15px;
 }
-

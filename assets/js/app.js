@@ -25,6 +25,7 @@ class NotesApp {
         this._selectedNoteId = null
         this._initEventListeners()
         this._renderNotesList()
+        this._updatePreviewState()
     }
 
     _initEventListeners() {
@@ -32,11 +33,24 @@ class NotesApp {
         this.notesList = document.querySelector(".notes-list")
         this.previewTitle = document.querySelector(".preview-title")
         this.previewBody = document.querySelector(".preview-body")
+        this.toggleButton = document.querySelector(".toggle-sidebar")
+        this.toggleButtonIcon = document.querySelector(".toggle-sidebar > .fa")
+        this.sidebar = document.querySelector(".notes-sidebar")
 
         this.addNotesButton.addEventListener("click", () => this._addNote())
         this.notesList.addEventListener("click", (e) => this._noteEventHandlers(e))
         this.previewTitle.addEventListener("input", (e) => this._updateNoteField(e))
         this.previewBody.addEventListener("input", (e) => this._updateNoteField(e))
+        this.toggleButton.addEventListener("click", () => this._toggleSidebar())
+    }
+
+    _toggleSidebar () {
+        this.sidebar.classList.toggle("show")
+        if (this.toggleButtonIcon.classList.contains("fa-angle-right")) {
+            this.toggleButtonIcon.classList.replace("fa-angle-right", "fa-angle-left")
+        } else {
+            this.toggleButtonIcon.classList.replace("fa-angle-left", "fa-angle-right")
+        }
     }
 
     _formatDate(dateInput) {
@@ -64,6 +78,7 @@ class NotesApp {
         }
 
         NoteStorage.save(this._notes)
+        this._updatePreviewState()
         this._renderNotesList()
     }
 
